@@ -89,8 +89,14 @@ correct:"b"
 
 
 
+
+
 let currentQuiz = 0;
 let score = 0;
+const TIMER_DURATION = 60;
+let timerLeft = TIMER_DURATION;
+let timeInterval;
+const timerElement = document.getElementById("timer");
 const quiz = document.getElementById("quiz");
 const answerEls = document.querySelectorAll(".answer");
 const questionEl = document.getElementById("question");
@@ -101,7 +107,20 @@ const d_text = document.getElementById("d_text");
 const submitBtn = document.getElementById("submit");
 
 loadQuiz();
+startTimer();
 
+function startTimer(){
+  clearInterval(timeInterval);
+  timeInterval = setInterval(updateTimer,1000);
+}
+function updateTimer(){
+  timerLeft--;
+  timerElement.innerText = timerLeft + "s";
+  if(timerLeft ==0){
+    clearInterval(timeInterval);
+    endQuiz();
+  }
+}
 function loadQuiz(){
   deSelected();
   
@@ -112,8 +131,20 @@ function loadQuiz(){
   b_text.innerText = currentQuizData.b;
   c_text.innerText = currentQuizData.c;
   d_text.innerText = currentQuizData.d;
+
+  timerLeft =TIMER_DURATION;
+  clearInterval(timeInterval);
+  startTimer();
+
   
   }
+
+  function endQuiz() {
+    clearInterval(timeInterval);
+    timerElement.innerText = "Time's up!"; 
+    quiz.innerHTML = `<h2> You answered correctly at ${score}/${quizData.length} questions.</h2> <button onClick="location.reload()">Reload</button>`;
+}
+  
 
   function getSelected(){
 
@@ -139,24 +170,32 @@ function loadQuiz(){
     
     
 submitBtn.addEventListener('click',()=>{
+  clearInterval(timeInterval);
 
   const answer = getSelected();
-  console.log(answer)
+  // console.log(answer)
   
   if(answer){
     if(answer === quizData[currentQuiz].correct){
       score++;
+      alert("Correct!")
     }
-      currentQuiz++;
+    else{
       
-
-      if(currentQuiz <quizData.length){
+      alert("Incorrect!")
+    }
+    currentQuiz++;
+    
+    
+    if(currentQuiz <quizData.length){
           loadQuiz();
+          
   
         }
         else{
-         quiz.innerHTML = `<h2> You answered correctly at ${score}/${quizData.length} questions.</h2> <button onClick="location.reload()">Reload</button>`
-        }
+          endQuiz();
+      } 
+        
       }
       
     

@@ -48,3 +48,10 @@ button:hover{
     background-color: rgb(69, 95, 95);
     color: rgb(3, 3, 4);
 }
+.timer{
+  font-size: 3.5rem;
+  color: black;
+  background-color: aliceblue;
+  padding: 2rem 3rem;
+  border-radius: 2rem;
+}
