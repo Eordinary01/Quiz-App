@@ -100,14 +100,25 @@ const timerElement = document.getElementById("timer");
 const quiz = document.getElementById("quiz");
 const answerEls = document.querySelectorAll(".answer");
 const questionEl = document.getElementById("question");
-const a_text = document.getElementById("a_text");
-const b_text = document.getElementById("b_text");
-const c_text = document.getElementById("c_text");
-const d_text = document.getElementById("d_text");
+
 const submitBtn = document.getElementById("submit");
 
-loadQuiz();
-startTimer();
+
+const startBtn = document.getElementById("startBtn");
+startBtn.addEventListener("click",startQuiz);
+
+
+
+// loadQuiz();
+// startTimer();
+
+function startQuiz(){
+  startBtn.style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("timer-container").style.display = "block";
+  loadQuiz();
+  startTimer();
+}
 
 function startTimer(){
   clearInterval(timeInterval);
@@ -121,6 +132,11 @@ function updateTimer(){
     endQuiz();
   }
 }
+
+const a_text = document.getElementById("a_text");
+const b_text = document.getElementById("b_text");
+const c_text = document.getElementById("c_text");
+const d_text = document.getElementById("d_text");
 function loadQuiz(){
   deSelected();
   
@@ -187,7 +203,7 @@ submitBtn.addEventListener('click',()=>{
     currentQuiz++;
     
     
-    if(currentQuiz <quizData.length){
+    if(currentQuiz <quizData.length - 1){
           loadQuiz();
           
   
