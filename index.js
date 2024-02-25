@@ -11,7 +11,7 @@ question: "What does GHz stand for?",
 question: "Which computer hardware device provides an interface for all other connected devices to communicate?",
     a: "CPU",
     b: "Hard Disk Drive",
-    c: "Mothboard",
+    c: "Motherboard",
     d: "RAM",
     correct: "c"
   },
@@ -203,7 +203,7 @@ submitBtn.addEventListener('click',()=>{
     currentQuiz++;
     
     
-    if(currentQuiz <quizData.length - 1){
+    if(currentQuiz <quizData.length){
           loadQuiz();
           
   
